@@ -31,7 +31,7 @@ class dice:
                     print("\nYour third draw is {}".format(self.de[i]))
                 
             print("\n\nThe result is : {}\n" .format(self.de[0]+self.de[1]+self.de[2]))
-            self.result = self.de[0]+self.de[1]+self.de[2]
+            self.result = sum(self.de)
             
             self.dice_result.append(self.result)
             self.round += 1
@@ -45,11 +45,11 @@ class dice:
                 if self.dice_result[self.round-1] < self.dice_result[self.round-2]:
                     print("\nYou lose in {} rounds\n". format(len(self.dice_result)))
                     input_lose = input("\nWant to play again? (y/n) : ")
-                    while input_lose!= "y" and input_lose!= "n":
+                    while input_lose!= "y" and input_lose!= "n" and input_lose!= "1" and input_lose!= "0":
                         input_lose = input("\nWant to play again? (y/n) : ")
-                    if input_lose == "y":
+                    if input_lose == "y" or input_lose == "1":
                         dice().lancer(nb_de, mode)
-                    elif input_lose == "n":
+                    elif input_lose == "n" or input_lose == "0":
                         quit()
                 
             if mode == "manual":
@@ -83,7 +83,7 @@ class game:
     def __init__(self) -> None:
         dice().__init__()
     
-    def display(self, nb_de:int, mode:str="manual") -> None:
+    def display(self, nb_de:int, mode:str="automatic") -> None:
         print("\n\n{:^75}\n\n".format("--- Dice to Roll ---"))
         print("Welcome to this game, you have " + str(nb_de) + " dice")
         
